@@ -1,0 +1,9 @@
+# css about clour
+
+  .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        

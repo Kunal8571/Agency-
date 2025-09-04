@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus Studios | Digital Creative Agency</title>
+    <meta name="description" content="Nexus Studios is a premium digital agency specializing in creative design, web development, and digital marketing solutions that drive growth.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #7c3aed;
             --primary-dark: #6d28d9;
+            --primary-gradient: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
             --secondary: #f59e0b;
             --accent: #10b981;
             --dark: #1e293b;
             --light: #f8fafc;
             --gray: #64748b;
             --success: #10b981;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-dark: rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -49,14 +53,21 @@
         
         /* Header & Navigation */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
             padding: 15px 0;
-            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .nav-container {
@@ -67,7 +78,7 @@
         
         .logo {
             font-size: 28px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary);
             display: flex;
             align-items: center;
@@ -85,6 +96,22 @@
         .nav-link {
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
         }
         
         .nav-link:hover {
@@ -92,27 +119,53 @@
         }
         
         .cta-button {
-            background: var(--primary);
+            background: var(--primary-gradient);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 30px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
         }
         
         .cta-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
         }
         
- /* Hero Section */
+        /* Hero Section */
         .hero {
-            padding: 160px 0 100px;
+            padding: 180px 0 100px;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             min-height: 100vh;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            top: -250px;
+            right: -250px;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+            bottom: -200px;
+            left: -200px;
+            z-index: 0;
         }
         
         .hero-container {
@@ -121,6 +174,8 @@
             justify-content: space-between;
             width: 100%;
             gap: 40px;
+            position: relative;
+            z-index: 2;
         }
         
         .hero-content {
@@ -132,21 +187,26 @@
         
         .hero-title {
             font-size: 3.5rem;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 1s ease forwards 0.5s;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--gray);
             margin-bottom: 30px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 1s ease forwards 0.8s;
+            font-weight: 400;
         }
         
         .hero-buttons {
@@ -161,32 +221,37 @@
         .secondary-button {
             border: 2px solid var(--primary);
             color: var(--primary);
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 30px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
+            background: transparent;
         }
         
         .secondary-button:hover {
             background: var(--primary);
             color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(124, 58, 237, 0.2);
         }
         
         .whatsapp-button {
             background: #25D366;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 30px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
         
         .whatsapp-button:hover {
             background: #128C7E;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
         
         .hero-image-container {
@@ -198,12 +263,49 @@
         
         .hero-image {
             width: 100%;
-            max-width: 750px;
+            max-width: 650px;
             height: auto;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
             opacity: 0;
-            animation: fadeIn 1.5s ease forwards 1.5s;
+            animation: fadeIn 1.5s ease forwards 1.5s, float 6s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .shape-1 {
+            top: 50px;
+            right: 50px;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            bottom: 80px;
+            right: 150px;
+            width: 120px;
+            height: 120px;
+            animation-delay: 1s;
+        }
+        
+        .shape-3 {
+            top: 150px;
+            right: 300px;
+            width: 100px;
+            height: 100px;
+            animation-delay: 2s;
         }
         
         /* Animations */
@@ -220,10 +322,20 @@
             }
         }
         
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
         /* Services Section */
         .services {
             padding: 100px 0;
             background: white;
+            position: relative;
         }
         
         .section-title {
@@ -231,6 +343,8 @@
             font-size: 2.5rem;
             margin-bottom: 50px;
             position: relative;
+            font-weight: 800;
+            color: var(--dark);
         }
         
         .section-title:after {
@@ -238,7 +352,7 @@
             position: absolute;
             width: 80px;
             height: 4px;
-            background: var(--primary);
+            background: var(--primary-gradient);
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
@@ -247,40 +361,92 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         
         .service-card {
             background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s;
             opacity: 0;
             transform: translateY(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--primary-gradient);
+            opacity: 0.05;
+            transition: height 0.5s ease;
+            z-index: -1;
+        }
+        
+        .service-card:hover::before {
+            height: 100%;
         }
         
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
         
         .service-icon {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 20px;
+            display: inline-flex;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
         }
         
         .service-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .service-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .service-problem-solution {
+            background: rgba(245, 158, 11, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .problem {
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .solution {
+            color: var(--primary);
+            font-weight: 600;
         }
         
         /* About Section */
         .about {
             padding: 100px 0;
             background: linear-gradient(to bottom, #f8fafc 0%, #f1f5f9 100%);
+            position: relative;
         }
         
         .about-container {
@@ -291,9 +457,10 @@
         }
         
         .about-image {
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            position: relative;
         }
         
         .about-image img {
@@ -311,6 +478,7 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             color: var(--dark);
+            font-weight: 800;
         }
         
         .about-content p {
@@ -329,15 +497,21 @@
         
         .stat-item {
             text-align: center;
-            padding: 20px;
+            padding: 25px 20px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
         
         .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
             color: var(--primary);
             margin-bottom: 5px;
         }
@@ -350,22 +524,23 @@
         /* Portfolio Section */
         .portfolio {
             padding: 100px 0;
-            background: #f1f5f9;
+            background: white;
         }
         
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
         
         .portfolio-item {
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
-            height: 250px;
+            height: 300px;
             opacity: 0;
             transform: translateY(20px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
         .portfolio-image {
@@ -381,15 +556,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(124, 58, 237, 0.9);
+            background: linear-gradient(to top, rgba(28, 28, 40, 0.9) 0%, rgba(28, 28, 40, 0.5) 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 30px;
             opacity: 0;
             transition: opacity 0.3s;
-            padding: 20px;
-            text-align: center;
         }
         
         .portfolio-item:hover .portfolio-overlay {
@@ -404,16 +578,115 @@
             color: white;
             font-size: 1.5rem;
             margin-bottom: 10px;
+            font-weight: 700;
         }
         
         .portfolio-category {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .portfolio-tools {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tool-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .portfolio-results {
+            background: rgba(16, 185, 129, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .result-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-box {
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .stat-desc {
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .clients-section {
+            padding: 60px 0;
+            background: white;
+            text-align: center;
+        }
+        
+        .clients-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+            opacity: 0.7;
+        }
+        
+        .client-logo {
+            height: 40px;
+            filter: grayscale(100%);
+            transition: all 0.3s;
+        }
+        
+        .client-logo:hover {
+            filter: grayscale(0%);
+            transform: scale(1.05);
         }
         
         /* Testimonials */
         .testimonials {
             padding: 100px 0;
-            background: white;
+            background: linear-gradient(to bottom, #f8fafc 0%, #f1f5f9 100%);
             position: relative;
         }
         
@@ -430,49 +703,62 @@
         }
         
         .testimonials-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
         }
         
         .testimonial {
-            text-align: center;
-            padding: 60px 40px 40px;
-            background: #f8fafc;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
             opacity: 0;
             transform: translateY(20px);
             position: relative;
-            margin: 30px 0;
+            transition: all 0.3s;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
         
         .testimonial-text {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-style: italic;
             margin-bottom: 30px;
             line-height: 1.8;
             color: var(--dark);
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: "“";
+            font-size: 60px;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            font-family: Georgia, serif;
         }
         
         .testimonial-author {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        
-        .testimonial-role {
-            color: var(--gray);
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .testimonial-avatar {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             overflow: hidden;
-            margin: 0 auto 15px;
-            border: 4px solid var(--primary);
+            border: 3px solid var(--primary);
         }
         
         .testimonial-avatar img {
@@ -481,135 +767,81 @@
             object-fit: cover;
         }
         
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: linear-gradient(to bottom, #f1f5f9 0%, #e2e8f0 100%);
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-        }
-        
-        .contact-info {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            height: fit-content;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .contact-info p {
-            margin-bottom: 30px;
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-        
-        .contact-text {
-            color: var(--dark);
-        }
-        
-        .contact-text strong {
-            display: block;
+        .testimonial-info h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
             margin-bottom: 5px;
         }
         
-        .contact-form {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(20px);
+        .testimonial-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
-        }
-        
-        textarea.form-input {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-button {
-            background: var(--primary);
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: var(--dark);
             color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .submit-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+        .cta::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            top: -250px;
+            right: -250px;
+        }
+        
+        .cta::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+            bottom: -200px;
+            left: -200px;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 30px;
+            position: relative;
         }
         
         .footer-grid {
@@ -617,6 +849,8 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
         }
         
         .footer-heading {
@@ -624,6 +858,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            font-weight: 700;
         }
         
         .footer-heading:after {
@@ -639,7 +874,7 @@
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         .footer-link {
@@ -649,19 +884,21 @@
         
         .footer-link:hover {
             color: white;
+            transform: translateX(5px);
         }
         
         .social-links {
             display: flex;
             gap: 15px;
+            margin-top: 20px;
         }
         
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             transition: all 0.3s;
@@ -678,6 +915,8 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
         }
         
         /* Responsive Design */
@@ -716,6 +955,10 @@
             .about-image {
                 order: -1;
             }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -750,19 +993,27 @@
                 grid-template-columns: 1fr;
             }
             
-            .contact-grid {
+            .portfolio-grid {
                 grid-template-columns: 1fr;
             }
             
             .testimonial {
-                padding: 40px 20px 30px;
+                padding: 30px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header>
+    <header id="header">
         <div class="container nav-container">
             <a href="#" class="logo">Nexus<span>Studios</span></a>
             
@@ -770,8 +1021,8 @@
                 <li><a href="#" class="nav-link">Home</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-                
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             
@@ -781,20 +1032,25 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Logos, Websites, Videos & Content — All in One Place 🚀</h1>
-                <p class="hero-subtitle">We help startups, students, and small businesses grow with modern design and digital services.</p>
+                <h1 class="hero-title">We design, build, and grow digital brands that stand out.</h1>
+                <p class="hero-subtitle">Creative design, powerful development, and SEO-driven growth strategies to elevate your brand in the digital landscape.</p>
                 <div class="hero-buttons">
-                    <a href="#portfolio" class="cta-button">View Portfolio</a>
-                    <a href="#services" class="secondary-button">Explore Services</a>
+                    <a href="https://calendly.com/nexusstudios" class="cta-button">📞 Schedule a Free Call</a>
+                    <a href="#services" class="secondary-button">Our Services</a>
                     <a href="https://wa.me/917056624456?text=Hi!%20I%20just%20visited%20your%20website%20and%20I'm%20interested%20in%20your%20services.%20Can%20you%20share%20more%20details%3F" class="whatsapp-button">💬 Chat on WhatsApp</a>
                 </div>
             </div>
+            
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                    alt="Creative digital agency team collaboration" class="hero-image" loading="lazy">
+                <div class="floating-shape shape-1"></div>
+                <div class="floating-shape shape-2"></div>
+                <div class="floating-shape shape-3"></div>
+            </div>
         </div>
-
-        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-            alt="Creative Studio" class="hero-image" loading="lazy">
     </section>
     
     <!-- Services Section -->
@@ -808,23 +1064,35 @@
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <h3 class="service-title">Website Development & Design</h3>
-                    <p>We craft modern, responsive, and user-friendly websites that help your business stand out. From portfolio sites to business solutions, we ensure speed, security, and style.</p>
+                    <p class="service-description">We craft modern, responsive, and user-friendly websites that help your business stand out.</p>
+                    <div class="service-problem-solution">
+                        <div class="problem">Visitors not converting?</div>
+                        <div class="solution">Our responsive web design turns them into clients.</div>
+                    </div>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-palette"></i>
                     </div>
-                    <h3 class="service-title">Logo Design</h3>
-                    <p>A logo is the face of your brand. We design unique and memorable logos that reflect your identity and create a lasting impression.</p>
+                    <h3 class="service-title">Logo & Brand Identity</h3>
+                    <p class="service-description">A logo is the face of your brand. We design unique and memorable logos that reflect your identity.</p>
+                    <div class="service-problem-solution">
+                        <div class="problem">Brand not standing out?</div>
+                        <div class="solution">Our distinctive logos create lasting impressions.</div>
+                    </div>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-image"></i>
                     </div>
-                    <h3 class="service-title">Creative Posters & Graphics</h3>
-                    <p>Eye-catching posters, flyers, and digital graphics designed to grab attention and deliver your message with impact.</p>
+                    <h3 class="service-title">Creative Graphics & Marketing</h3>
+                    <p class="service-description">Eye-catching posters, flyers, and digital graphics designed to grab attention and deliver impact.</p>
+                    <div class="service-problem-solution">
+                        <div class="problem">Marketing materials not converting?</div>
+                        <div class="solution">Our compelling visuals drive engagement.</div>
+                    </div>
                 </div>
                 
                 <div class="service-card">
@@ -832,15 +1100,35 @@
                         <i class="fas fa-video"></i>
                     </div>
                     <h3 class="service-title">Video Editing & Motion Graphics</h3>
-                    <p>From social media reels to professional edits, we bring your videos to life with smooth transitions, engaging effects, and storytelling.</p>
+                    <p class="service-description">From social media reels to professional edits, we bring your videos to life with engaging effects.</p>
+                    <div class="service-problem-solution">
+                        <div class="problem">Video content not engaging?</div>
+                        <div class="solution">Our edits boost watch time and shares.</div>
+                    </div>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-pen-nib"></i>
                     </div>
-                    <h3 class="service-title">Content Writing & Copywriting</h3>
-                    <p>Powerful words that connect. We write SEO-friendly, creative, and persuasive content to engage your audience and grow your brand.</p>
+                    <h3 class="service-title">Content Writing & SEO</h3>
+                    <p class="service-description">Powerful words that connect. We write SEO-friendly, creative content to engage your audience.</p>
+                    <div class="service-problem-solution">
+                        <div class="problem">Content not ranking or converting?</div>
+                        <div class="solution">Our SEO-optimized copy drives traffic and leads.</div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Digital Marketing & SEO</h3>
+                    <p class="service-description">Data-driven strategies to increase your online visibility, drive traffic, and generate qualified leads.</p>
+                    <div class="service-problem-solution">
+                        <div class="problem">Not getting enough qualified traffic?</div>
+                        <div class="solution">Our SEO strategies boost rankings and conversions.</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -852,31 +1140,32 @@
             <div class="about-container">
                 <div class="about-content">
                     <h2 class="section-title">About Nexus Studios</h2>
-                    <p>We are a passionate team of designers, developers, and creatives dedicated to delivering exceptional digital experiences. With years of industry experience, we blend creativity with technical expertise to help businesses thrive in the digital landscape.</p>
-                    <p>Our mission is to transform ideas into impactful digital solutions that not only look beautiful but also drive results. We believe in collaboration, innovation, and building long-term partnerships with our clients.</p>
+                    <p>We are a passionate team of designers, developers, and digital strategists dedicated to delivering exceptional digital experiences. Founded in 2018, we've helped hundreds of businesses establish their digital presence and achieve their growth goals.</p>
+                    <p>Our mission is to transform ideas into impactful digital solutions that not only look beautiful but also drive measurable results. We believe in collaboration, innovation, and building long-term partnerships with our clients.</p>
                     
                     <div class="about-stats">
                         <div class="stat-item">
-                            <div class="stat-number">Affordable</div>
-                            <div class="stat-label"></div>
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years Experience</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">Trust</div>
-                            <div class="stat-label"></div>
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Projects Delivered</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">Years Experience</div>
-                            <div class="stat-label"></div>
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Client Satisfaction</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">Happy Client</div>
-                            <div class="stat-label"></div>
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Happy Clients</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Our Team" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                        alt="Nexus Studios team collaborating in a modern office" loading="lazy">
                 </div>
             </div>
         </div>
@@ -889,28 +1178,93 @@
             
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Website Design" class="portfolio-image" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1497215842964-222b430dc094?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                        alt="Corporate website redesign project" class="portfolio-image" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">E-commerce Website</h3>
-                        <p class="portfolio-category">Web Design</p>
+                        <h3 class="portfolio-title">Corporate Website Redesign</h3>
+                        <p class="portfolio-category">Web Design & Development</p>
+                        <div class="portfolio-tools">
+                            <span class="tool-tag">Figma</span>
+                            <span class="tool-tag">WordPress</span>
+                            <span class="tool-tag">Elementor</span>
+                        </div>
+                        <div class="portfolio-results">
+                            <p class="result-text">Increased conversion rate by 42% and reduced bounce rate by 35%</p>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Logo Design" class="portfolio-image" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                        alt="E-commerce website development" class="portfolio-image" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Brand Identity</h3>
-                        <p class="portfolio-category">Logo Design</p>
+                        <h3 class="portfolio-title">E-Commerce Platform</h3>
+                        <p class="portfolio-category">Web Development</p>
+                        <div class="portfolio-tools">
+                            <span class="tool-tag">Shopify</span>
+                            <span class="tool-tag">JavaScript</span>
+                            <span class="tool-tag">CSS3</span>
+                        </div>
+                        <div class="portfolio-results">
+                            <p class="result-text">Generated $250K+ in first-year revenue with 25% returning customers</p>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1529458838797-6d0e653b0c77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Poster Design" class="portfolio-image" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1634942536746-46b9a6de9231?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                        alt="Brand identity design project" class="portfolio-image" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3 class="portfolio-title">Music Festival</h3>
-                        <p class="portfolio-category">Poster Design</p>
+                        <h3 class="portfolio-title">Brand Identity Design</h3>
+                        <p class="portfolio-category">Logo & Branding</p>
+                        <div class="portfolio-tools">
+                            <span class="tool-tag">Illustrator</span>
+                            <span class="tool-tag">Photoshop</span>
+                            <span class="tool-tag">InDesign</span>
+                        </div>
+                        <div class="portfolio-results">
+                            <p class="result-text">Created a memorable brand identity that increased recognition by 65%</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-value">200+</div>
+                    <div class="stat-desc">Projects Delivered</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">50+</div>
+                    <div class="stat-desc">Happy Clients</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">98%</div>
+                    <div class="stat-desc">Client Satisfaction</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">42%</div>
+                    <div class="stat-desc">Avg. Growth</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients-section">
+        <div class="container">
+            <h2 class="section-title">Trusted By Leading Brands</h2>
+            <div class="clients-grid">
+                <img src="https://via.placeholder.com/150x60/7c3aed/ffffff?text=Client+1" alt="Client Logo" class="client-logo" loading="lazy">
+                <img src="https://via.placeholder.com/150x60/7c3aed/ffffff?text=Client+2" alt="Client Logo" class="client-logo" loading="lazy">
+                <img src="https://via.placeholder.com/150x60/7c3aed/ffffff?text=Client+3" alt="Client Logo" class="client-logo" loading="lazy">
+                <img src="https://via.placeholder.com/150x60/7c3aed/ffffff?text=Client+4" alt="Client Logo" class="client-logo" loading="lazy">
+                <img src="https://via.placeholder.com/150x60/7c3aed/ffffff?text=Client+5" alt="Client Logo" class="client-logo" loading="lazy">
             </div>
         </div>
     </section>
@@ -919,94 +1273,47 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <h2 class="section-title">What Our Clients Say</h2>
-
+            
             <div class="testimonials-container">
                 <div class="testimonial">
-                    <div class="testimonial-avatar">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" loading="lazy">
+                    <p class="testimonial-text">Nexus Studios transformed our online presence completely. Our new website not only looks amazing but has increased our leads by 60%. Their team was professional, creative, and delivered beyond our expectations.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson" loading="lazy">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechVision Inc.</p>
+                        </div>
                     </div>
-                    <p class="testimonial-text">
-                        "Nexus Studios transformed our online presence completely. Their attention to detail and creative approach resulted in a website that not only looks amazing but also performs exceptionally well."
-                    </p>
-                    <h4 class="testimonial-author">Sarah Johnson</h4>
-                    <p class="testimonial-role">CEO, TechInnovate</p>
                 </div>
-
+                
                 <div class="testimonial">
-                    <div class="testimonial-avatar">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" loading="lazy">
+                    <p class="testimonial-text">Working with Nexus Studios was a game-changer for our brand. Their strategic approach to design and marketing helped us stand out in a crowded market. The results have been phenomenal!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" loading="lazy">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Michael Chen</h4>
+                            <p>Marketing Director, Nova Solutions</p>
+                        </div>
                     </div>
-                    <p class="testimonial-text">
-                        "The branding package created by Nexus Studios perfectly captured our company's vision. Their team was professional, responsive, and delivered beyond our expectations. Highly recommended!"
-                    </p>
-                    <h4 class="testimonial-author">Michael Roberts</h4>
-                    <p class="testimonial-role">Marketing Director, BloomTech</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Let's Talk About Your Project</h3>
-                    <p>We're ready to bring your ideas to life. Send us a message and we'll respond as soon as possible.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-text">
-                                <strong>Email Us</strong>
-                                <span>info@nexusstudios.com</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-text">
-                                <strong>Call Us</strong>
-                                <span>+1 (555) 123-4567</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-text">
-                                <strong>Visit Us</strong>
-                                <span>123 Design Street, Creative City</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your Digital Presence?</h2>
+                <p class="cta-subtitle">Let's discuss your project and explore how we can help your business grow.</p>
+                <div class="cta-buttons">
+                    <a href="https://calendly.com/nexusstudios" class="cta-button">📞 Schedule a Free Call</a>
+                    <a href="https://wa.me/917056624456?text=Hi!%20I%20just%20visited%20your%20website%20and%20I'm%20interested%20in%20your%20services.%20Can%20you%20share%20more%20details%3F" class="whatsapp-button">💬 Chat on WhatsApp</a>
                 </div>
-                
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Your Name</label>
-                        <input type="text" id="name" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email" class="form-label">Your Email</label>
-                        <input type="email" id="email" class="form-input" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message" class="form-label">Your Message</label>
-                        <textarea id="message" class="form-input" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
             </div>
         </div>
     </section>
@@ -1015,35 +1322,46 @@
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-info">
+                <div>
                     <h3 class="footer-heading">Nexus Studios</h3>
-                    <p>Creating exceptional digital experiences that drive growth and engagement for brands worldwide.</p>
-                    
+                    <p>We design, build, and grow digital brands that stand out.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-links">
-                    <h3 class="footer-heading">Quick Links</h3>
-                    <a href="#" class="footer-link">Home</a>
-                    <a href="#services" class="footer-link">Services</a>
-                    <a href="#about" class="footer-link">About</a>
-                    <a href="#portfolio" class="footer-link">Portfolio</a>
-                    <a href="#testimonials" class="footer-link">Testimonials</a>
-                    <a href="#contact" class="footer-link">Contact</a>
+                <div>
+                    <h3 class="footer-heading">Services</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Web Design & Development</a>
+                        <a href="#" class="footer-link">Logo & Brand Identity</a>
+                        <a href="#" class="footer-link">Graphic Design</a>
+                        <a href="#" class="footer-link">Video Editing</a>
+                        <a href="#" class="footer-link">Digital Marketing</a>
+                    </div>
                 </div>
                 
-                <div class="footer-links">
-                    <h3 class="footer-heading">Services</h3>
-                    <a href="#" class="footer-link">Website Design</a>
-                    <a href="#" class="footer-link">Logo Design</a>
-                    <a href="#" class="footer-link">Poster Design</a>
-                    <a href="#" class="footer-link">Video Editing</a>
-                    <a href="#" class="footer-link">Branding</a>
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Home</a>
+                        <a href="#services" class="footer-link">Services</a>
+                        <a href="#about" class="footer-link">About</a>
+                        <a href="#portfolio" class="footer-link">Portfolio</a>
+                        <a href="#testimonials" class="footer-link">Testimonials</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Contact</h3>
+                    <div class="footer-links">
+                        <a href="mailto:info@nexusstudios.com" class="footer-link">info@nexusstudios.com</a>
+                        <a href="tel:+917056624456" class="footer-link">+91 70566 24456</a>
+                        <p class="footer-link">123 Digital Avenue<br>Creative District, CR 56789</p>
+                    </div>
                 </div>
             </div>
             
@@ -1054,37 +1372,34 @@
     </footer>
 
     <script>
-        // Simple animation for elements when they come into view
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.service-card, .portfolio-item, .testimonial, .contact-form');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            animatedElements.forEach(element => {
-                observer.observe(element);
-            });
-            
-            // Form submission
-            const contactForm = document.querySelector('.contact-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Thanks for your message! We will get back to you soon.');
-                    contactForm.reset();
-                });
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
+        
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-card, .portfolio-item, .testimonial');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                    element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
