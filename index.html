@@ -481,7 +481,16 @@ header.scrolled nav {
                 transform: translateY(-20px) translateX(10px) rotate(5deg); 
             }
         }
-        
+        @media (max-width: 900px) {
+  .about-content {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  .about-visual {
+    height: 350px;
+    margin-top: 30px;
+  }
+}
         .about-text h2 {
             font-size: 3rem;
             margin-bottom: 2rem;
@@ -947,7 +956,19 @@ header.scrolled nav {
             color: var(--text-light);
             padding: 0 15px;
         }
-        
+        @media (max-width: 900px) {
+  .process-timeline {
+    flex-direction: column;
+    align-items: center;
+  }
+  .process-step {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .process-timeline::before {
+    display: none;
+  }
+}
         /* Testimonials Section */
         #testimonials {
             background: linear-gradient(to bottom, var(--light-bg), var(--light));
@@ -1298,6 +1319,12 @@ header.scrolled nav {
         .social-links a:hover::before {
             opacity: 1;
         }
+        @media (max-width: 480px) {
+  .footer-brand h3 { font-size: 1rem; }
+  .footer-links h4 { font-size: 0.95rem; }
+  .footer-bottom { font-size: 0.7rem; }
+  .social-links a { width: 28px; height: 28px; font-size: 0.8rem; }
+}
 
         
 
@@ -1460,6 +1487,60 @@ header.scrolled nav {
                 font-size: 1.1rem;
             }
         }
+
+        /* --- Responsive Fixes for All Sections --- */
+@media (max-width: 992px) {
+  .container {
+    max-width: 98%;
+    padding: 0 10px;
+  }
+  section {
+    padding: 60px 2%;
+  }
+  .hero-headline { font-size: 2.8rem; }
+  .hero-subtext { font-size: 1.1rem; }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  section {
+    padding: 40px 2%;
+    min-height: unset;
+  }
+  .about-content,
+  .services-grid,
+  .features-grid,
+  .testimonials-grid,
+  .portfolio-grid,
+  .footer-content {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .hero-headline { font-size: 2rem; }
+  .hero-subtext { font-size: 1rem; }
+  .service-card,
+  .feature-card,
+  .testimonial-card {
+    padding: 20px 10px;
+  }
+  .footer-brand h3 { font-size: 1.3rem; }
+  .footer-links h4 { font-size: 1.1rem; }
+  .social-links a { width: 38px; height: 38px; font-size: 1rem; }
+  .footer-bottom { font-size: 0.9rem; padding-top: 10px; }
+}
+
+@media (max-width: 576px) {
+  .hero-headline { font-size: 1.3rem; }
+  .hero-subtext { font-size: 0.95rem; }
+  .footer-brand h3 { font-size: 1.1rem; }
+  .footer-links h4 { font-size: 1rem; }
+  .footer-bottom { font-size: 0.8rem; }
+  .social-links a { width: 32px; height: 32px; font-size: 0.9rem; }
+}
     </style>
 </head>
 <body>
