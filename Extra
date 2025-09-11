@@ -7,3 +7,34 @@
             margin-bottom: 5px;
         }
         
+
+
+        make a website for a digital agency take refrance from this website and make sure our design should be much better then them and more creative fast loarding speed mobile frienndly and all device friendly seo frendly are services website devlopment ,video editing ,graphic design ,contant writing made it very proficnal and its a new agency  but dont mention its a new 
+
+https://noomoagency.com/work
+https://www.olive.in/
+https://services.dgtlinnovations.in/services
+https://colorwhistle.com/
+https://www.ramotion.com/web-design/
+https://www.tastyedits.com/
+https://increditors.com/
+https://www.artattackk.com/directory/top-10-video-editing-companies-in-delhi/
+https://vdigtech.com/services/
+
+
+
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --light: #ffffff;
+            --light-bg: #f8f9fa;
+            --light-border: rgba(0, 0, 0, 0.1);
+            --text: #2d3142;
+            --text-light: #6c6f7f;
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
